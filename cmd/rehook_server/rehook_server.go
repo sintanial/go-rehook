@@ -2,10 +2,12 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	rehook "github.com/sintanial/go-rehook/pkg"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"net/http"
+	"os"
 	"time"
 )
 
@@ -27,7 +29,8 @@ func main() {
 	}
 
 	if *addr == "" {
-		log.Panic("missing addr")
+		fmt.Println("missing addr")
+		os.Exit(1)
 	}
 
 	server := rehook.NewServer(log, time.Duration(*retransmitTimeout)*time.Second)

@@ -2,11 +2,13 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/go-yaml/yaml"
 	rehook "github.com/sintanial/go-rehook/pkg"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"io/ioutil"
+	"os"
 	"time"
 )
 
@@ -31,25 +33,30 @@ func main() {
 	}
 
 	if *addr == "" {
-		log.Panic("missing addr")
+		exit("missing addr")
 	}
 
 	if *rulepath == "" {
-		log.Panic("missing rules file")
+		exit("missing rules file")
 	}
 
 	cfgdata, err := ioutil.ReadFile(*rulepath)
 	if err != nil {
-		log.Panic("failed read config file", zap.Error(err))
+		exit("failed read config file: " + err.Error())
 	}
 
 	var cfg Config
 	if err := yaml.Unmarshal(cfgdata, &cfg); err != nil {
-		log.Panic("failed parse config file", zap.Error(err))
+		exit("failed parse config file: " + err.Error())
 	}
 
 	client := rehook.NewClient(log, time.Duration(*reconnTimeout)*time.Second, cfg.Rules)
 	if err := client.Tunnel(*addr); err != nil {
-		log.Panic("failed tunnel from client to server", zap.Error(err))
+		exit("failed tunnel from client to server: " + err.Error())
 	}
+}
+
+func exit(msg string) {
+	fmt.Println(msg)
+	os.Exit(1)
 }
