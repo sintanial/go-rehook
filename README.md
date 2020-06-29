@@ -1,4 +1,4 @@
-# ReHook [![GoDoc][doc-img]][doc] [![Build Status][ci-img]][ci] [![Coverage Status][cov-img]][cov]
+# ReHook 
 
 A utility that allows you to test third-party service (stripe, github, paypal, etc...) webhooks locally.
 
@@ -30,7 +30,7 @@ In the value, the address where to relay the request.
 For example:
 ```yaml
 rules:
-    /webhook/test/foo: http://localhost:8080/webhook/test/foo
+    /webhook/stripe/foo: http://localhost:8080/webhook/stripe/foo
     /another/path/bar: http://localhost:8080/webhook/test/bar
 ```
 
@@ -43,7 +43,9 @@ rehook_client -addr 10.1.2.3:8181 -rules /path/to/rules.yaml
 ```bash
 # all query parameters, headers, body are keeped
 
-curl -v -L "http://10.1.2.3:8181/webhook/test/foo?hello=world"
+curl -v -L "http://10.1.2.3:8181/webhook/stripe/foo?hello=world"
 ```
 
-### Step 5: Register webhook retranslator address *http://10.1.2.3:8181/webhook/test/foo?hello=world* to third-party service (for example stripe)
+### Step 5: Register webhook retranslator address to third-party service.
+For example stripe
+![Stripe webhook example](stripe.jpg)

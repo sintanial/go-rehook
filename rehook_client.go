@@ -3,10 +3,10 @@ package main
 import (
 	"flag"
 	"github.com/go-yaml/yaml"
+	rehook "github.com/sintanial/go-rehook/pkg"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"io/ioutil"
-	rehook "rehook/pkg"
 	"time"
 )
 

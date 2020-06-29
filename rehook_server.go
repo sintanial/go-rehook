@@ -2,10 +2,10 @@ package main
 
 import (
 	"flag"
+	rehook "github.com/sintanial/go-rehook/pkg"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"net/http"
-	rehook "rehook/pkg"
 	"time"
 )
 
@@ -13,7 +13,7 @@ func main() {
 	addr := flag.String("addr", "", "Server listen addr, example: :8080")
 	certFile := flag.String("cert", "", "Path to public chain certificate")
 	keyFile := flag.String("key", "", "Path to private certificate")
-	timeout := flag.Int("timeout", 0, "Retransmit timeout from server to client in seconds, zero means infinity timeout")
+	retransmitTimeout := flag.Int("timeout", 0, "Retransmit timeout from server to client in seconds, zero means infinity timeout")
 	flag.Parse()
 
 	zapcfg := zap.NewDevelopmentConfig()
@@ -30,7 +30,7 @@ func main() {
 		log.Panic("missing addr")
 	}
 
-	server := rehook.NewServer(log, time.Duration(*timeout)*time.Second)
+	server := rehook.NewServer(log, time.Duration(*retransmitTimeout)*time.Second)
 
 	log.Info("listen and serve", zap.String("addr", *addr))
 
