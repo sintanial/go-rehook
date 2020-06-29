@@ -4,7 +4,7 @@ A utility that allows you to test third-party service (stripe, github, paypal, e
 
 ## Installation
 
-`go get -u github.com/sintanial/go-rehook`
+`go get -u github.com/sintanial/go-rehook/...`
 
 ## How it work
 
