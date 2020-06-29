@@ -48,4 +48,4 @@ curl -v -L "http://10.1.2.3:8181/webhook/stripe/foo?hello=world"
 
 ### Step 5: Register webhook retranslator address to third-party service.
 For example stripe
-![Stripe webhook example](stripe.jpg)
+![Stripe webhook example](stripe.png)
