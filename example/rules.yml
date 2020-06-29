@@ -1,0 +1,2 @@
+rules:
+  /webhook/test/foo: http://localhost:8182/webhook/test/foo
